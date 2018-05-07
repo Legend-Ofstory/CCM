@@ -2,7 +2,7 @@ package ccm.data.function;
 
 import java.util.ArrayList;
 
-import ccm.data.table.FreeLancer;
+import ccm.data.VO.FreeLancer;
 
 /***************************
  * 
