@@ -17,59 +17,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
+<link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 <body>
-	<jsp:include page="/frame/header.jsp"></jsp:include>
+	<jsp:include page="/frame/header.jsp" />
 	회원가입
-	<form action="" method="">
-		<table>
-			<tr>
-				<td>
-					아이디
-				</td>
-				<td>
-					<input type="text" name="fid">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					이메일
-				</td>
-				<td>
-					<input type="text" name="fid_front">
-					@
-					<input type="text" name="fid_rear">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					비밀번호
-				</td>
-				<td>
-					<input type="password" name="fpw">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					비밀번호 확인
-				</td>
-				<td>
-					<input type="password" name="refpw">
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="checkbox" name="agree">
-					이용약관 및 개인정보 이용방침에 동의합니다 시발
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="button" value="회원가입" onclick="">
-				</td>
-			</tr>
-		</table>
-	</form>
+	<div align="center">
+		<form action="" method="post">
+			<table >
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" name="fid"></td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td>
+						<input type="text" name="fid_front"> @ 
+						<input type="text" name="fid_rear"></td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" name="fpw"></td>
+				</tr>
+				<tr>
+					<td>비밀번호 확인</td>
+					<td><input type="password" name="refpw"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="checkbox" name="agree">
+						이용약관 및 개인정보 이용방침에 동의합니다
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="button" value="회원가입" onclick="">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 	<jsp:include page="/frame/footer.jsp"></jsp:include>
 </body>
 </html>

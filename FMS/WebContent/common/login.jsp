@@ -2,9 +2,9 @@
 
 	로그인 페이지
 	
-	작성자 : 
+	작성자 : 박태근
 
-	수정일 : 
+	수정일 : 20180506
 	
 --%>
 
@@ -20,44 +20,47 @@
 </head>
 <body>
 <jsp:include page="/frame/header.jsp"></jsp:include>
-	로그인
-	<form>
-		<table>
-			<tr>
-				<td>
-					<table>
-						<tr>
-							<td>아이디</td>
-							<td>
-								<input type="text" name="feid">
-							</td>
-						</tr>
-						<tr>
-							<td>비밀번호</td>
-							<td>
-								<input type="password" name="fepw">
-							</td>
-						</tr>
-						<tr>
-							<td colspan = "2">
-								<input type="button" value="로그인"  onclick="">
-							</td>
-						</tr>
-						<tr>
-							<td colspan = "2">
-								<a href="">아이디</a>/
-								<a href="">비밀번호</a>
-								찾기&#09;|&#09;
-								<a href="">회원가입</a>
-							</td>
-						</tr>
-					</table>
-				</td>
-				<td>EUREKA!는프리랜서 관리시스템 입니다.</td>
-			</tr>
-		</table>
-	</form>
-
+	<div align="center">
+		로그인
+		<form>
+			<table>
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td>아이디</td>
+								<td>
+									<input type="text" name="feid">
+								</td>
+								<td rowspan="2">
+									<input type="button" value="로그인"  onclick="">
+								</td>
+							</tr>
+							
+							<tr>
+								<td>비밀번호</td>
+								<td>
+									<input type="password" name="fepw">
+								</td>
+							</tr>
+							
+							<tr>
+								<td colspan = "2">
+									<a href="">아이디</a>/
+									<a href="">비밀번호</a>
+									찾기&#09;|&#09;
+									<a href="">회원가입</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>EUREKA!는프리랜서 관리시스템 입니다.</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 <jsp:include page="/frame/footer.jsp"></jsp:include>
 </body>
 </html>

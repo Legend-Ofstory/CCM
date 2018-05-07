@@ -13,11 +13,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<div>
+<html>
+	<head>
+		<link rel="stylesheet" href="../css/bootstrap.css">
+	</head>
+</html>
+<div align="center">
 	로고
-	<ul>
+	<div>
 		<li><a href="">프로젝트 찾기</a></li>
-		<li><a href="">프리랜서 찾기</a></li>
+		<li><a href="Eu?f">프리랜서 찾기</a></li>
 		<li><a href="">My페이지</a></li>
 	</ul>
 	<c:choose>

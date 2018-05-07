@@ -39,6 +39,7 @@ public class CommonServ extends HttpServlet
 		System.out.println(command);
 		
 		CommonAF af = (CommonAF) CommonAF.getInstance();
+		
 		Action action = af.getAction(command);
 		
 		if(action != null)

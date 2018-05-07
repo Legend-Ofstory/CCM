@@ -6,14 +6,14 @@ import ccm.controller.action.comact.GoToMainAction;
 /***************************
  * 
  * 
- * 악숀 인터페이스
- * 이걸로 각 기능의 액션을 만든다
+ * �븙�� �씤�꽣�럹�씠�뒪
+ * �씠嫄몃줈 媛� 湲곕뒫�쓽 �븸�뀡�쓣 留뚮뱺�떎
  * 
- * 작성자 : 
+ * �옉�꽦�옄 : 
  * 
- * 수정자 : 
+ * �닔�젙�옄 : 
  * 
- * 수정일 : 
+ * �닔�젙�씪 : 
  *
  *
  ***************************/
@@ -22,6 +22,7 @@ public class CommonAF
 {
 	private static CommonAF instance = new CommonAF();
 	private CommonAF() { super(); }
+	
 	public static CommonAF getInstance() { return instance; }
 	
 	public Action getAction(String command) 
