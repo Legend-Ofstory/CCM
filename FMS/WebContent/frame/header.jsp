@@ -28,7 +28,7 @@
 	<c:choose>
 		<%--로그인 상태가 아니면 --%>
 		<c:when test="${loginfree == null && loginemp == null}">
-			<a href="">로그인</a> / <a href="">회원가입</a>
+			<a href="Eu?c=login">로그인</a> / <a href="Eu?c=join">회원가입</a>
 		</c:when>
 		<c:otherwise>
 			<a href="">로그아웃</a>

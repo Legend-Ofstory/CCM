@@ -50,11 +50,10 @@ public class DBManager
 	}
 
 	// select를 수행한 후 리소스 해제를 위한 메소드
-	public static void close(Connection conn, Statement stmt, ResultSet rs)
+	public static void close(Connection conn, Statement stmt, ResultSet... rs)
 	{
 		try
 		{
-			rs.close();
 			stmt.close();
 			conn.close();
 		}

@@ -19,10 +19,10 @@
 <title>로그인</title>
 </head>
 <body>
-<jsp:include page="/frame/header.jsp"></jsp:include>
+<jsp:include page="/frame/header.jsp"/>
 	<div align="center">
 		로그인
-		<form>
+		<form action="Eu?c=login_form" method="post">
 			<table>
 				<tr>
 					<td>
@@ -30,17 +30,17 @@
 							<tr>
 								<td>아이디</td>
 								<td>
-									<input type="text" name="feid">
+									<input type="text" name="feid" id="feid">
 								</td>
 								<td rowspan="2">
-									<input type="button" value="로그인"  onclick="">
+									<input type="submit" value="로그인">
 								</td>
 							</tr>
 							
 							<tr>
 								<td>비밀번호</td>
 								<td>
-									<input type="password" name="fepw">
+									<input type="password" name="fepw" id="fepw">
 								</td>
 							</tr>
 							

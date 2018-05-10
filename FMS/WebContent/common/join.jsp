@@ -12,19 +12,22 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/js/common.js">
 </head>
 <body>
 	<jsp:include page="/frame/header.jsp" />
-	회원가입
+	
 	<div align="center">
-		<form action="" method="post">
-			<table >
+		<form action="Eu?c=join" method="post" name="frm">
+			<table border="1">
+				<tr>회원가입</tr>
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" name="fid"></td>
@@ -49,7 +52,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="button" value="회원가입" onclick="">
+					<td colspan="2" align="center">
+						<input type="submit" value="가입완료" onclick="<!-- return joinCheck() -->">
+						<input type="reset" value="다시입력" />
 					</td>
 				</tr>
 			</table>
