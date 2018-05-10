@@ -33,6 +33,7 @@ public class FreelancerDAO {
 			pstmt.setString(2, fVo.getfPW());
 			pstmt.setString(3, fVo.getEmail());
 
+			// DB업데이트
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
