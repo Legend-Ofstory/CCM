@@ -6,7 +6,7 @@ import java.sql.Date;
 
 public class Project
 {
-	private int projNum;				// 프로젝트 번호
+	private String projNum;				// 프로젝트 번호
 	private String projCompany;			// 프로젝트 시행 회사
 	private boolean isExtern;			// 외부 프로젝트 유무
 	private String projField;			// 프로젝트 유형(SM or SI)
@@ -31,7 +31,7 @@ public class Project
 	{
 		super();
 	}
-	public Project(int projNum, String projCompany, boolean isExtern, String projField, String projName,
+	public Project(String projNum, String projCompany, boolean isExtern, String projField, String projName,
 			String projState, Date projRegisterDate, String projRegisterer, Date projReviseDate, String projReviser,
 			Date projStartDate, Date projEndDate, int projExpectedTime, String projTarget, String projPartner,
 			String projPlan, Date projRecruitStartDate, Date projRecruitEndDate, String projDevelopSort,
@@ -62,7 +62,7 @@ public class Project
 	
 	public void setParams(ResultSet rs) throws SQLException
 	{
-		this.projNum = rs.getInt("PROJNUM");
+		this.projNum = rs.getString("PROJNUM");
 		this.projCompany = rs.getString("PROJCOMPANY");
 		this.isExtern = rs.getBoolean("ISEXTERN");
 		this.projField = rs.getString("PROJFIELD");
@@ -84,8 +84,8 @@ public class Project
 		this.dbNum = rs.getInt("DBNUM");
 	}
 	
-	public int getProjNum() { return projNum; }
-	public void setProjNum(int projNum) { this.projNum = projNum; }
+	public String getProjNum() { return projNum; }
+	public void setProjNum(String projNum) { this.projNum = projNum; }
 	public String getProjCompany() { return projCompany; }
 	public void setProjCompany(String projCompany) { this.projCompany = projCompany; }
 	public boolean isExtern() { return isExtern; }

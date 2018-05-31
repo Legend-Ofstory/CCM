@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script type="text/javascript" src="script/message.js?ver=1"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,11 +36,11 @@
 						</h3>
 						(<c:choose>
 							<c:when test="${message.empWriter != null}">
-								${message.empWriter}
+								${emp.empName}
 								<input type="hidden" name="empWriter" value="${message.empWriter}">
 							</c:when>
 							<c:when test="${message.freeWriter != null}">
-								${message.freeWriter}
+								${free.freeName}
 								<input type="hidden" name="freeWriter" value="${message.freeWriter}">
 							</c:when>
 						</c:choose>
@@ -51,10 +52,12 @@
 					<td>
 						<c:choose>
 							<c:when test="${message.empWriter != null}">
-								<input type="text" name="freeReceiver" value="${message.empWriter}" readonly="readonly">
+								<input type="hidden" name="freeReceiver" value="${message.empWriter}" readonly="readonly">
+								${emp.empName}
 							</c:when>
 							<c:when test="${message.freeWriter != null}">
-								<input type="text" name="empReceiver" value="${message.freeWriter}" readonly="readonly">
+								<input type="hidden" name="empReceiver" value="${message.freeWriter}" readonly="readonly">
+								${free.freeName}
 							</c:when>
 						</c:choose>
 					</td>
@@ -65,12 +68,13 @@
 				</tr>
 				<tr>
 					<th>관련 프로젝트</th>
-					<td colspan="5">
-						<input type="text" readonly="readonly" name="projNum" value="${message.projNum}">
+					<td colspan="6">
+						<input type="hidden" name="projNum" value="${message.projNum}">
+						<input type="text" id="projNum" readonly="readonly" value = "${message.projNum}">
 					</td>
 				</tr>
 				<tr>
-					<td colspan="6"><textarea rows="15" cols="50">${message.msgContent}</textarea>
+					<td colspan="6"><textarea rows="15" cols="90">${message.msgContent}</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -81,7 +85,6 @@
 			</table>
 		</form>
 	</div>
-	<br>
 	<br>
 	<div>
 		<form method="post" action="Eu?c=show_message">
@@ -104,7 +107,7 @@
 					<td>${status.count}</td>
 					<!-- 제목 -->
 					<td>
-						<a href="Eu?c=show_message&no=${message.msgNum}">
+						<a href="Eu?c=show_message&no=${message.msgNum}&check=${message.msgChecked}">
 							${message.msgTitle}
 						</a>
 					</td>
@@ -123,7 +126,7 @@
 					<!-- 메세지 확인 여부 -->
 					<td>
 						<c:choose>
-							<c:when test="${message.msgChecked != false}">
+							<c:when test="${message.msgChecked != '1'}">
 								<label>미확인</label>
 							</c:when>
 							<c:otherwise>
@@ -136,6 +139,7 @@
 		</table>
 		</form>
 	</div>
+	<br>
 	<div>
 		<form action="Eu?c=message" method="post" name="sendMsgFrm">
 			<table border="1" align="center">
@@ -145,7 +149,7 @@
 				<tr>
 					<td>제목</td>
 					<td colspan="5">
-						<input type="text" name="msgTitle" value="${reMsg.msgTitle}">
+						<input type="text" id="title" name="msgTitle" value="${reMsg.msgTitle}">
 						<input type="hidden" name="prevMsgNum">
 					
 					</td>
@@ -155,12 +159,12 @@
 					<td>
 						<c:choose>
 							<c:when test="${loginemp == null}">
-								<input type="text" name="freeWriter" value="${loginfree.freeName}"
-									readonly="readonly">
+								<input type="hidden" name="freeWriter" value="${loginfree.freeId}">
+								<input type="text" value="${freeTemp.freeName}">
 							</c:when>
 							<c:when test="${loginfree == null}">
-								<input type="text" name="empWriter" value="${loginemp.empName}"
-									readonly="readonly">
+								<input type="hidden" id="empWriter" name="empWriter" value="${loginemp.empId}">
+								<input type="text" value="${empTemp.empName}">
 							</c:when>
 						</c:choose></td>
 					<td>발신일</td>
@@ -169,10 +173,19 @@
 					<td>
 						<c:choose>
 							<c:when test="${reMsg.freeReceiver != null}">
-								<input type="text" name="freeReceiver" value="${reMsg.freeReceiver}">
+								<input type="hidden" id="freeReceiver" name="freeReceiver" value="${reMsg.freeReceiver}">
+								<input type="hidden" id="empReceiver" name="empReceiver">
+								<input type="text" id="receiver" readonly="readonly" value="${reFree.freeName}">
 							</c:when>
 							<c:when test="${reMsg.empReceiver != null}">
-								<input type="text" name="empReceiver" value="${reMsg.empReceiver}">
+								<input type="hidden" id="freeReceiver" name="freeReceiver">
+								<input type="hidden" id="empReceiver" name="empReceiver" value="${reMsg.empReceiver}">
+								<input type="text" id="receiver" readonly="readonly" value="${reEmp.empName}">
+							</c:when>
+							<c:when test="${reMsg.freeReceiver == null && reMsg.empReceiver == null }">
+								<input type="hidden" id="freeReceiver" name="freeReceiver">
+								<input type="hidden" id="empReceiver" name="empReceiver">
+								<input type="text" id="receiver" readonly="readonly">
 							</c:when>
 						</c:choose>
 						<input type="button" value="검색" onclick="selectReceiver()">
@@ -187,12 +200,12 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-						<textarea rows="10" cols="70" name="msgContent"></textarea>
+						<textarea rows="10" cols="90" name="msgContent" id="content"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="6" align="right">
-						<input type="submit" value="보내기">
+						<input type="submit" value="보내기" onclick="sendCheck()">
 						<input type="button" value="취소">
 					</td>
 				</tr>

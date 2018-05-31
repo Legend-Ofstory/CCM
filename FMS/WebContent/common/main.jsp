@@ -30,25 +30,25 @@
 				<td>
 					<tr>
 						<th>개발분야</th>
-						<td></td>
+						<td><%-- ${project.projDevelopSort} --%></td>
 						<th>시작일</th>
-						<td></td>
+						<td><%-- ${project.projStartDate} --%></td>
 						<th>예상기간</th>
-						<td></td>
+						<td><%-- ${project.projExpectedTime} --%></td>
 						<td></td>
 					</tr>
 					<tr>
 						<th>참여인원</th>
 						<td></td>
 						<th>고객사</th>
-						<td colspan="3"></td>
+						<td colspan="3"><%-- ${project.projTarget} --%></td>
 						<td></td>
 					</tr>
 					<tr>
 						<th>언어</th>
-						<td></td>
+						<td><%-- ${project.projLang} --%></td>
 						<th>DBMS</th>
-						<td></td>
+						<td><%-- ${project.dbNum} --%></td>
 						<th>TOOL/<br>FRAMEWORK</th>
 						<td></td>
 						<td></td>

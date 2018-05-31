@@ -21,46 +21,26 @@ import java.sql.SQLException;
 
 public class Employee
 {
-	/*
-	 * `EMPID` VARCHAR(15) NOT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPPW` VARCHAR(100) NOT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPDUTY` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPNAME` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPDEPT` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPPICTURE` MEDIUMBLOB NULL,
-	`EMPJOINDATE` DATETIME NOT NULL,
-	`EMPDROPDATE` DATETIME NULL DEFAULT NULL,
-	`EMPPHONE` VARCHAR(11) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPEMAIL` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPBIRTH` DATETIME NULL DEFAULT NULL,
-	`EMPSEX` TINYINT(1) NULL DEFAULT NULL,
-	`EMPMARRIED` TINYINT(1) NULL DEFAULT NULL,
-	`EMPFRONTADDR` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPREARADDR` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPBANK` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPACCNAME` VARCHAR(12) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPACCOUNT` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
-	`EMPAUTH` INT(11) NOT NULL,
-	 * */
-	private String empId;
-	private String empPw;
-	private String empDuty;
-	private String empName;
-	private String empDept;
-	private String empPicture;
-	private Date empJoinDate;
-	private Date empDropDate;
-	private String empPhone;
-	private String empEmail;
-	private Date empBirth;
-	private Boolean empSex;
-	private Boolean empMarried;
-	private String empFrontAddr;
-	private String empRearAddr;
-	private String empBank;
-	private String empAccName;
-	private String empAccount;
-	private Integer empAuth;
+	
+	private String empId;			// 사원 아이디
+	private String empPw;			// 사원 비밀번호
+	private String empDuty;			// 사원 직책
+	private String empName;			// 사원 이름
+	private String empDept;			// 사원 부서
+	private String empPicture;		// 사원 사진
+	private Date empJoinDate;		// 사원 입사일
+	private Date empDropDate;		// 사원 퇴사일
+	private String empPhone;		// 사원 전화번호
+	private String empEmail;		// 사원 이메일
+	private Date empBirth;			// 사원 생일
+	private Boolean empSex;			// 사원 성별
+	private Boolean empMarried;		// 사원 결혼 여부
+	private String empFrontAddr;	// 사원 주소
+	private String empRearAddr;		// 사원 상세주소
+	private String empBank;			// 사원 은행
+	private String empAccName;		// 사원 계좌번호 이름
+	private String empAccount;		// 사원 계좌번호
+	private Integer empAuth;		// 사원 권한
 	
 	public Employee()
 	{
@@ -153,4 +133,13 @@ public class Employee
 	public void setEmpAccount(String empAccount) { this.empAccount = empAccount; }
 	public Integer getEmpAuth() { return empAuth; }
 	public void setEmpAuth(Integer empAuth) { this.empAuth = empAuth; }
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", empPw=" + empPw + ", empDuty=" + empDuty + ", empName=" + empName
+				+ ", empDept=" + empDept + ", empPicture=" + empPicture + ", empJoinDate=" + empJoinDate
+				+ ", empDropDate=" + empDropDate + ", empPhone=" + empPhone + ", empEmail=" + empEmail + ", empBirth="
+				+ empBirth + ", empSex=" + empSex + ", empMarried=" + empMarried + ", empFrontAddr=" + empFrontAddr
+				+ ", empRearAddr=" + empRearAddr + ", empBank=" + empBank + ", empAccName=" + empAccName
+				+ ", empAccount=" + empAccount + ", empAuth=" + empAuth + "]";
+	}
 }

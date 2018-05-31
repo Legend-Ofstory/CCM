@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import ccm.data.table.*;
 import ccm.util.DBManager;;
@@ -104,6 +107,56 @@ public class FreelancerDAO {
 			}
 		}
 		return fVo;
+	}
+
+	public List<Freelancer> selectAllFree() {
+		String sql = "select * from freelancer order by freeId desc";
+
+		List<Freelancer> list = new ArrayList<Freelancer>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				Freelancer fVo = new Freelancer();
+
+				fVo.setFreeId(rs.getString("freeId"));
+				fVo.setFreePw(rs.getString("freePw"));
+				fVo.setFreeName(rs.getString("freeName"));
+				fVo.setFreePic(rs.getString("freePic"));
+				fVo.setFreeBirth(rs.getDate("freeBirth"));
+				fVo.setFreesex(rs.getBoolean("freeSex"));
+				fVo.setFreePhone(rs.getString("freePhone"));
+				fVo.setFreeEmail(rs.getString("freeEmail"));
+				fVo.setFreeJoinDate(rs.getDate("freeJoindate"));
+				fVo.setFreeDropDate(rs.getDate("freeDropDate"));
+				fVo.setFreeClass(rs.getInt("freeClass"));
+				fVo.setFreeKosa(rs.getInt("freeKosa"));
+				fVo.setFreeMarried(rs.getBoolean("freeMarried"));
+				fVo.setFreeFrontAddr(rs.getString("freeFrontaddr"));
+				fVo.setFreeRearAddr(rs.getString("freeRearaddr"));
+				fVo.setFreeBank(rs.getString("freeBank"));
+				fVo.setFreeAccName(rs.getString("freeAccName"));
+				fVo.setFreeAccount(rs.getString("freeAccount"));
+				fVo.setFreeReviser(rs.getString("freeReviser"));
+				fVo.setFreeReviseDate(rs.getDate("freeReviseDate"));
+				fVo.setFreeScore(rs.getInt("freeScore"));
+				
+				list.add(fVo);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+		return list;
 	}
 	
 }

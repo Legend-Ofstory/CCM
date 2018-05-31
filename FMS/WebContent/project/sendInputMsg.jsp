@@ -12,7 +12,7 @@
 <body>
 <c:set var="now" value="<%= new java.util.Date() %>" />
 	<div>
-		<form action="Eu?e=send_Input_msg" method="post" name="frm">
+		<form action="Eu?e=send_input_message" method="post" name="frm">
 			<table align="center" border="1">
 				<tr>
 					<th colspan="4">
@@ -22,14 +22,14 @@
 				</tr>
 				<tr>
 					<th>발신인</th>
-					<td><input type="text" id="writer" readonly="readonly"></td>
+					<td><input type="text" name="empWriter" readonly="readonly"></td>
 					<th>발신일</th>
 					<td><fmt:formatDate value="${now}"/></td>
 				</tr>
 				<tr>
 					<th>프로젝트명</th>
 					<td colspan="3">
-						<input type="text" value="${message.projName}">
+						<input type="text" name ="projNum" value="${message.projName}">
 					</td>
 				</tr>
 				<tr>
@@ -40,17 +40,17 @@
 				<c:forEach var="sendMsg" items="sendInputFreeList">
 					<tr>
 						<td>
-							<input type="text" value="<%-- ${sendMsg.freeName} --%>">
+							<input type="text" value="${sendMsg.freeId}">
 						</td>
 						<td>
-							<input type="date" id="joinDate">~
+							<input type="date" name = "joinDate">~
 						</td>
 						<td>
-							<input type="date" id="dropDate">
+							<input type="date" name = "dropDate">
 						</td>
 						<td>
-							<input type="button" value="요청전송" onclick="">
-							<input type="button" value="투입" onclick="">
+							<input type="button" name="" value="요청전송" onclick="">
+							<input type="button" name="input" value="투입" onclick="">
 					</tr>
 				</c:forEach>
 				<tr>

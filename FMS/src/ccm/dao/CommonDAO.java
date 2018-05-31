@@ -1,20 +1,19 @@
 package ccm.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-import ccm.data.table.*;
+import ccm.data.table.Employee;
+import ccm.data.table.Freelancer;
+import ccm.data.table.JoinProj;
+import ccm.data.table.Message;
+import ccm.data.table.Project;
 import ccm.util.DBManager;;
 
 public class CommonDAO
@@ -100,63 +99,6 @@ public class CommonDAO
 		}
 		
 		System.out.println(loginFree == null ? "로그인프리널" : "로그인프리낫널");
-		
-		return res;
-	}
-
-	public int msgReceiverCheck(String id) //로그인할때 아이디랑 비번이 맞는지 체크해주는거
-	{
-		String freeSql = "SELECT * FROM FREELANCER WHERE FREEID = ?";
-		String empSql = "SELECT * FROM EMPLOYEE WHERE EMPID = ?";
-		
-		//결과값 -1은 로그인실패 1은 프리랜서로그인 2는 직원로그인
-		int res = -1;
-		Connection conn = null;
-		ResultSet freers = null;
-		ResultSet emprs = null;
-		PreparedStatement pstmt = null;
-		
-		try
-		{
-			conn = DBManager.getConnection();
-			pstmt = conn.prepareStatement(freeSql);
-			
-			pstmt.setString(1, id);
-			
-			freers = pstmt.executeQuery();
-			
-			while (freers.next())
-			{
-				if(freers.getString("FREEID") != null);
-				{	
-					res = 1;
-					break;
-				}
-			}
-			
-			pstmt.close();
-			pstmt = conn.prepareStatement(empSql);
-			pstmt.setString(1, id);
-			
-			emprs = pstmt.executeQuery();
-			
-			while (emprs.next())
-			{
-				if(emprs.getString("EMPID") != null);
-				{
-					res = 2;
-					break;
-				}
-			}
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			DBManager.close(conn, pstmt, freers, emprs);
-		}
 		
 		return res;
 	}
@@ -259,43 +201,6 @@ public class CommonDAO
 		return msgVo;
 	}
 	
-	/*public Message selectLastMsgEmpByNo(String id) {
-		String sql = "select msgNum from message where empReceiver = ? order by msgNum desc limit 1";
-
-		Message msgVo = null;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			conn = DBManager.getConnection();
-
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			
-
-			if (rs.next()) {
-				
-				msgVo = new Message();
-
-				msgVo.setParams(rs);
-
-			}
-		} catch (Exception e) {
-
-			e.printStackTrace();
-
-		} finally {
-
-			DBManager.close(conn, pstmt, rs);
-
-		}
-
-		return msgVo;
-	}
-	
-	*/
-
 	public void insertMsg(Message msgVo) {
 		String sql = "insert into message(msgNum, prevMsgNum, freeWriter, empWriter, freeReceiver, "
 				+ "empReceiver, msgTitle, msgContent, msgSendDate, msgChecked, projNum) "
@@ -307,14 +212,50 @@ public class CommonDAO
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setInt(1, msgVo.getPrevMsgNum());
-			pstmt.setString(2, msgVo.getFreeWriter());
-			pstmt.setString(3, msgVo.getEmpWriter());
-			pstmt.setString(4, msgVo.getFreeReceiver());
-			pstmt.setString(5, msgVo.getEmpReceiver());
+			// 이전메시지가 없으면 널을 넣어준다.
+			if(msgVo.getPrevMsgNum() == null || msgVo.getPrevMsgNum()=="") {
+				pstmt.setString(1, null);
+			} else {
+				pstmt.setInt(1, Integer.parseInt(msgVo.getPrevMsgNum()));
+			}
+			
+			// 프리랜서 작성자가 널이면 널을 넣어준다.
+			if(msgVo.getFreeWriter() == null || msgVo.getFreeWriter() == "") {
+				pstmt.setString(2, null);
+			} else {
+				pstmt.setString(2, msgVo.getFreeWriter());
+			}
+			
+			// 사원 작성자가 널이면 널을 넣어준다.
+			if(msgVo.getEmpWriter() == null || msgVo.getEmpWriter() == "") {
+				pstmt.setString(3, null);
+			} else {
+				pstmt.setString(3, msgVo.getEmpWriter());
+			}
+			
+			// 프리랜서 수신자가 널이면 널을 넣어준다.
+			if(msgVo.getFreeReceiver() == null || msgVo.getFreeReceiver() == "") {
+				pstmt.setString(4, null);
+			} else {
+				pstmt.setString(4, msgVo.getFreeReceiver());
+			}
+			
+			// 사원 수신자가 널이면 널을 넣어준다.
+			if(msgVo.getEmpReceiver() == null || msgVo.getEmpReceiver() == "") {
+				pstmt.setString(5, null);
+			} else {
+				pstmt.setString(5, msgVo.getEmpReceiver());
+			}
+
 			pstmt.setString(6, msgVo.getMsgTitle());
 			pstmt.setString(7, msgVo.getMsgContent());
-			pstmt.setInt(8, msgVo.getProjNum());
+			
+			// 연관된 프로젝트가 없으면(연관 프로젝트가 널이면) 널을 넣어준다.
+			if(msgVo.getProjNum() == null || msgVo.getProjNum() == "") {
+				pstmt.setString(8, null);
+			} else {
+				pstmt.setInt(8, Integer.parseInt(msgVo.getProjNum()));
+			}
 			
 			pstmt.executeUpdate();
 			
@@ -327,8 +268,8 @@ public class CommonDAO
 	}
 	
 	public Message updateMsgCheckedDate(String msgNo) {
-		String sql = "update message(msgCheckedDate, msgChecked) "
-				+ "set(now(), 0) where msgNum = ? and msgChecked = 1";
+		String sql = "update message set msgCheckedDate = now(), msgChecked = 1"
+				+ " where msgNum = ? and msgChecked = 0";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
@@ -348,4 +289,138 @@ public class CommonDAO
 		return null;
 
 	}
+	
+	public Project selectLastJoinProject() {
+		String sql = "select * from project order by projRegisterDate desc limit = 1";
+
+		Project pVo = null;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+
+			rs = stmt.executeQuery(sql);
+
+			if (rs.next()) {
+				
+				pVo = new Project();
+
+				pVo.setParams(rs);
+				
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			DBManager.close(conn, stmt, rs);
+
+		}
+
+		return pVo;
+	}
+	
+	public List<Project> selectAllJoinableProject() {
+		// 시작하지 않은 프로젝트들을 가져오는 메소드 
+		String sql = "select * from project where projStartDate >= now() order by msgNum desc";
+
+		List<Project> list = new ArrayList<Project>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				Project pVo = new Project();
+
+				pVo.setParams(rs);
+				
+				list.add(pVo);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+
+		return list;
+	}
+	
+	public List<JoinProj> selectJoinProjByFreeId(String id) {
+		String sql = "select * from joinproj where freeId='"+ id + "' order by joinNum desc";
+
+		List<JoinProj> list = new ArrayList<JoinProj>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				JoinProj jVo = new JoinProj();
+
+				jVo.setParams(rs);
+				
+				list.add(jVo);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+
+		return list;
+	}
+	public Project selectOneProjByNo(String No) {
+		String sql = "select * from project where projNum=?";
+
+		Project pVo = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBManager.getConnection();
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, No);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				
+				pVo = new Project();
+
+				pVo.setParams(rs);
+
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			DBManager.close(conn, pstmt, rs);
+
+		}
+
+		return pVo;
+	}
+	
+	
 }

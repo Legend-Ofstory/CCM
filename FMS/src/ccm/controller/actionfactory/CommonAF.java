@@ -5,7 +5,7 @@ import ccm.controller.action.*;
 import ccm.controller.action.comat.*;
 import ccm.controller.action.empat.AppointmentInterviewAction;
 import ccm.controller.action.empat.AppointmentInterviewFormAction;
-import ccm.controller.action.empat.InterviewAction;
+import ccm.controller.action.empat.InterviewScheduleAction;
 import ccm.controller.action.empat.ResultInterviewAction;
 
 /***************************
@@ -62,9 +62,15 @@ public class CommonAF
 		} else if (command.equals("show_message")) {
 			// 메세지를 확인하는 액션
 			action = new ShowMessageAction();
+		} else if (command.equals("msg_select_project")) {
+			// 메세지와 연관된 프로젝트 번호를 프로젝트에 넣어주는 액션
+			action = new SelectProjectAction();
+		} else if (command.equals("msg_select_receiver")) {
+			// 메세지와 연관된 수신인을 찾는 액션
+			action = new SelectReceiverAction();
 		} else if (command.equals("interview")) {
 			// 면접 일정 / 결과등록 페이지로 이동하는 액션
-			action = new InterviewAction();
+			action = new InterviewScheduleAction();
 		} else if (command.equals("result_interview")) {
 			// 면접 결과를 등록하는 액션
 			action = new ResultInterviewAction();
@@ -74,7 +80,13 @@ public class CommonAF
 		} else if (command.equals("appointment_interview_form")) {
 			// 면접일을 지정하기 위한 페이지로 이동하는 액션
 			action = new AppointmentInterviewFormAction();
-		} 
+		} else if (command.equals("interview_schedule")) {
+			// 면접일정을 확인하고 결과를 등록하기 위한 페이지로 이동하는 액션
+			action = new InterviewScheduleAction();
+		} else if (command.equals("send_input_message")) {
+			// 투입메시지를 전송하는 액션
+			action = new SendInputMessage();
+		}
 
 		return action;
 	}

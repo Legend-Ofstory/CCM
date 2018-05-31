@@ -21,14 +21,14 @@
 			</tr>
 			<tr>
 				<th>날짜</th>
-				<td><input type="date" id="interviewDate"></td>
+				<td><input type="date" name="interviewDate"></td>
 				<th>시간</th>
-				<td><input type="datetime" id="interviewTime"></td>
+				<td><input type="datetime" name="interviewTime"></td>
 			</tr>
 			<tr>
 				<th>알림말</th>
 				<td colspan="3">
-					<textarea rows="10" cols="50"></textarea>
+					<textarea name="content" rows="10" cols="50"></textarea>
 				</td>
 			</tr>
 			<tr>

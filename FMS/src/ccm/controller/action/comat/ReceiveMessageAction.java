@@ -22,22 +22,27 @@ public class ReceiveMessageAction implements Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String url = "common/msg/showMsg.jsp";
-		String freeWriter = request.getParameter("freeWriter");
-		String empWriter = request.getParameter("empWriter");
+		// 보내진 no를 msgNo 변수에 적용한다.
+		String msgNo = request.getParameter("no");
+		
+		// 보내진 작성자를 수신인으로 저장
+		String freeReceiver = request.getParameter("freeWriter");
+		String empReceiver = request.getParameter("empWriter");
+		
+		System.out.println("메시지 번호 : " + msgNo);
+		System.out.println("보낸이(프리랜서 아이디) : " + freeReceiver);
+		System.out.println("보낸인(사원 아이디) : " + empReceiver);
 		
 		CommonDAO cDao = CommonDAO.getInstance();
 		FreelancerDAO fDao = FreelancerDAO.getInstance();
 		EmployeeDAO eDao = EmployeeDAO.getInstance();
 		
-		// 보내진 no를 msgNo 변수에 적용한다.
-		String msgNo = request.getParameter("no");
+		//수신인 정보를 가져옴
+		Freelancer free = fDao.getfVo(freeReceiver);
+		Employee emp = eDao.geteVo(empReceiver);
+		
 		Message reMsg = new Message();
 		
-		System.out.println(msgNo);
-		System.out.println(freeWriter);
-		System.out.println(empWriter);
-		
-
 		// 현재 사용자의 회원번호를 세션으로부터 가져오는 과정
 		Freelancer freeTempVo = (Freelancer) request.getSession().getAttribute("loginfree");
 		Employee empTempVo = (Employee) request.getSession().getAttribute("loginemp");
@@ -49,19 +54,22 @@ public class ReceiveMessageAction implements Action{
 				
 		if( freeTempVo != null ) {
 			messageList = cDao.selectAllMsgFree(freeTempVo.getFreeId());
+			request.setAttribute("freeTemp", freeTempVo);
 		} else if( empTempVo != null ) {
 			messageList = cDao.selectAllMsgEmp(empTempVo.getEmpId());
+			request.setAttribute("empTemp", empTempVo);
 		}
 		
-		reMsg.setPrevMsgNum(Integer.parseInt(msgNo));
-		reMsg.setProjNum(Integer.parseInt(request.getParameter("projNum")));
-		reMsg.setMsgTitle(request.getParameter("msgTitle"));
+		reMsg.setPrevMsgNum(msgNo);
+		reMsg.setProjNum(request.getParameter("projNum"));
+		reMsg.setMsgTitle("Re:" + request.getParameter("msgTitle"));
 		
-		if( freeWriter != null ) {
-			reMsg.setFreeReceiver(request.getParameter("freeWriter"));
+		if( freeReceiver!= null ) {
+			reMsg.setFreeReceiver(free.getFreeName());
 			System.out.println(reMsg);
-		} else if( empWriter != null ) {
-			reMsg.setEmpReceiver(request.getParameter("empWriter"));
+		} 
+		if( empReceiver != null ) {
+			reMsg.setEmpReceiver(emp.getEmpId());
 			System.out.println(reMsg);
 		}
 
@@ -69,6 +77,9 @@ public class ReceiveMessageAction implements Action{
 		System.out.println(reMsg);
 		System.out.println("------------------");
 		
+		
+		request.setAttribute("reFree", free);
+		request.setAttribute("reEmp", emp);
 		request.setAttribute("reMsg", reMsg);
 		request.setAttribute("messageList", messageList);
 		

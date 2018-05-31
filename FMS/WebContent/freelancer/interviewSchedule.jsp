@@ -83,17 +83,16 @@
 			</tr>
 			<c:forEach var="interview" items="interviewList">
 				<tr>
-					<td>freeState</td>
-					<td>freeName</td>
-					<td>place</td>
+					<td>${interview.intvState}</td>
+					<td>${interview.freeId}</td>
+					<td>${interview.intvDate}</td>
+					<td>${interview.intvLocation}</td>
 					<td>
 						<input type="radio" name="choice" id="sucess">채용
 						<input type="radio" name="choice" id="hold">보류
 						<input type="radio" name="choice" id="fail">불채용
 					</td>
-					<td>
-						<input type="text" id="reason">
-					</td>
+					<td><input type="text" name="intvReason"></td>
 				</tr>
 			</c:forEach>
 			<tr>

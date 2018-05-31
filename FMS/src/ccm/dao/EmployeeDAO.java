@@ -148,5 +148,35 @@ public class EmployeeDAO {
 		return list;
 	}
 
-	
+	/*public List<FreelancerInterview_view> selectAllInterviewSchdule() {
+		String sql = "select * from FreelancerInterview_view"
+				+ "where interview= order by msgNum desc";
+
+		List<Message> list = new ArrayList<Message>();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBManager.getConnection();
+			stmt = conn.createStatement();
+
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				Message msgVo = new Message();
+
+				msgVo.setParams(rs);
+				
+				list.add(msgVo);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, stmt, rs);
+		}
+
+		return list;
+	}*/
 }
