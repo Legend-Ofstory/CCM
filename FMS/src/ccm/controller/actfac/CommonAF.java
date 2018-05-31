@@ -1,12 +1,11 @@
-package ccm.controller.actionfactory;
+package ccm.controller.actfac;
 
-import ccm.controller.Action;
 import ccm.controller.action.*;
-import ccm.controller.action.comat.*;
-import ccm.controller.action.empat.AppointmentInterviewAction;
-import ccm.controller.action.empat.AppointmentInterviewFormAction;
-import ccm.controller.action.empat.InterviewScheduleAction;
-import ccm.controller.action.empat.ResultInterviewAction;
+import ccm.controller.action.comact.*;
+import ccm.controller.action.empact.AppointmentInterviewAction;
+import ccm.controller.action.empact.AppointmentInterviewFormAction;
+import ccm.controller.action.empact.InterviewScheduleAction;
+import ccm.controller.action.empact.ResultInterviewAction;
 
 /***************************
  * 

@@ -14,7 +14,7 @@
 				<th>번호</th>
 				<th>프로젝트 이름</th>
 			</tr>
-		<c:forEach var="joinProj" items="joinProjList" varStatus="status">
+		<c:forEach var="joinProj" items="${joinProjList}" varStatus="status">
 			<tr>
 				<td>${status.count}</td>
 				<td>

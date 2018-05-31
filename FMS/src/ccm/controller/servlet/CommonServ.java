@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ccm.controller.Action;
-import ccm.controller.actionfactory.CommonAF;
+import ccm.controller.actfac.CommonAF;
+import ccm.controller.action.Action;
 
 /**
  * Servlet implementation class Test

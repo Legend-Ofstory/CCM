@@ -1,4 +1,4 @@
-package ccm.controller.action.comat;
+package ccm.controller.action.comact;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ccm.controller.Action;
+import ccm.controller.action.Action;
 import ccm.dao.CommonDAO;
 import ccm.data.table.Message;
 

@@ -1,7 +1,7 @@
-package ccm.controller.actionfactory;
+package ccm.controller.actfac;
 
-import ccm.controller.Action;
-import ccm.controller.action.empat.*;
+import ccm.controller.action.Action;
+import ccm.controller.action.empact.*;
 
 public class EmployeeAF
 {

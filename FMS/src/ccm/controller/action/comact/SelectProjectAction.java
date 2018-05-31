@@ -1,4 +1,4 @@
-package ccm.controller.action.comat;
+package ccm.controller.action.comact;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ccm.controller.Action;
+import ccm.controller.action.Action;
 import ccm.dao.CommonDAO;
 import ccm.data.table.Employee;
 import ccm.data.table.Freelancer;
@@ -46,6 +46,8 @@ public class SelectProjectAction implements Action{
 		}
 		
 		request.setAttribute("joinProjList", joinproj);
+		
+		System.out.println(joinproj);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);

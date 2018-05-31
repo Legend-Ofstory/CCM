@@ -1,4 +1,4 @@
-package ccm.controller;
+package ccm.controller.action;
 
 import java.io.IOException;
 

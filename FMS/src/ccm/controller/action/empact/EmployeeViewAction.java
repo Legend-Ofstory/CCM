@@ -1,4 +1,4 @@
-package ccm.controller.action.empat;
+package ccm.controller.action.empact;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ccm.controller.Action;
+import ccm.controller.action.Action;
 
 public class EmployeeViewAction implements Action{
 
